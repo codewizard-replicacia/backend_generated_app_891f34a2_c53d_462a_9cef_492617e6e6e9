@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Model">
+            <EntityType HasStream="false" Name="ShoppingCart">
+                <Key>
+                    <PropertyRef Name="CartId"/>
+                </Key>
+                <Property Name="CartId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Quantity" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Amount" Type="Edm.Decimal" isUnique="false"/>
+                <NavigationProperty Name="Products" Type="Collection(Model.ProductInStock)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="ProductInStock">
+                <Key>
+                    <PropertyRef Name="ProductId"/>
+                </Key>
+                <Property Name="ProductId" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="ProductName" Type="Edm.String" isUnique="false"/>
+                <Property Name="IconName" Type="Edm.String" isUnique="false"/>
+                <Property Name="ProductDescription" Type="Edm.String" isUnique="false"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="ShoppingCarts" EntityType="Model.ShoppingCart">
+                    <NavigationPropertyBinding Path="Products" Target="ProductInStocks"/>
+                </EntitySet>
+                <EntitySet Name="ProductInStocks" EntityType="Model.ProductInStock"/>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
